@@ -1,0 +1,26 @@
+{
+  "name": "ak-x-md",
+  "version": "1.0.0",
+  "description": "AK X MD WhatsApp Bot - Mini Base",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "github:tenka-san/WaBails",
+    "express": "^4.18.2",
+    "fs-extra": "^11.2.0",
+    "pino": "^8.17.0",
+    "axios": "^1.2.5",
+    "moment-timezone": "^0.6.0",
+    "mongodb": "^5.7.0",
+    "node-fetch": "3.3.2",
+    "body-parser": "^1.20.2"
+  },
+  "engines": {
+    "node": ">=18.x"
+  },
+  "keywords": ["whatsapp", "bot", "baileys"],
+  "author": "AK X MD",
+  "license": "MIT"
+}

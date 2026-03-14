@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>⚔️ AK X MD ⚔️</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #0a0a0a;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      overflow: hidden;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    .box {
+      width: 340px;
+      padding: 30px 24px;
+      background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(255, 165, 0, 0.3), 0 0 60px rgba(255, 165, 0, 0.1);
+      border: 1px solid rgba(255, 165, 0, 0.2);
+    }
+    .logo {
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+    }
+    h3 {
+      color: #ffa500;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+      text-shadow: 0 0 10px rgba(255,165,0,0.5);
+    }
+    h6 {
+      color: #888;
+      font-size: 0.75rem;
+      margin-bottom: 20px;
+      font-weight: normal;
+    }
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #ffa500, transparent);
+      margin: 16px 0;
+    }
+    .label {
+      color: #aaa;
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .input-container {
+      display: flex;
+      width: 100%;
+      margin-bottom: 8px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 165, 0, 0.3);
+    }
+    .input-container input {
+      flex: 1;
+      height: 3rem;
+      font-size: 1rem;
+      border: none;
+      outline: none;
+      background: #222;
+      color: #fff;
+      padding-left: 1rem;
+    }
+    .input-container button {
+      width: 90px;
+      height: 3rem;
+      border: none;
+      outline: none;
+      background: linear-gradient(135deg, #ffa500, #ff6b00);
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    .input-container button:hover {
+      background: linear-gradient(135deg, #ffb733, #ff8c00);
+      transform: scale(1.02);
+    }
+    #result {
+      margin-top: 16px;
+      min-height: 40px;
+    }
+    .code-box {
+      background: #222;
+      border: 1px solid rgba(255,165,0,0.4);
+      border-radius: 10px;
+      padding: 14px;
+      margin-top: 12px;
+    }
+    .code-label {
+      color: #888;
+      font-size: 0.75rem;
+      margin-bottom: 6px;
+    }
+    .code-value {
+      color: #ffa500;
+      font-size: 1.6rem;
+      font-weight: bold;
+      letter-spacing: 4px;
+      font-family: monospace;
+      cursor: pointer;
+      text-shadow: 0 0 10px rgba(255,165,0,0.5);
+      transition: all 0.2s;
+    }
+    .code-value:hover { color: #fff; }
+    .copy-hint {
+      color: #555;
+      font-size: 0.7rem;
+      margin-top: 6px;
+    }
+    .status-msg {
+      color: #aaa;
+      font-size: 0.85rem;
+    }
+    .error-msg { color: #ff4444; font-size: 0.85rem; }
+    .footer {
+      margin-top: 20px;
+      color: #444;
+      font-size: 0.7rem;
+    }
+    .footer span { color: #ffa500; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="box">
+      <div class="logo">⚔️</div>
+      <h3>AK X MD</h3>
+      <h6>WhatsApp Bot — Mini Base</h6>
+      <div class="divider"></div>
+
+      <span class="label">📱 Enter your number with country code</span>
+      <div class="input-container">
+        <input placeholder="94xxxxxxxxx" type="number" id="number"/>
+        <button id="submit">PAIR</button>
+      </div>
+
+      <div id="result"></div>
+
+      <div class="footer">Powered by <span>AK X MD</span></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+  <script>
+    const resultEl = document.getElementById('result');
+    const submitBtn = document.getElementById('submit');
+    const numberEl = document.getElementById('number');
+
+    async function copyCode(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        document.getElementById('codeVal').innerText = 'COPIED!';
+        setTimeout(() => { document.getElementById('codeVal').innerText = text; }, 1200);
+      } catch(e) {}
+    }
+
+    submitBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const raw = numberEl.value.replace(/[^0-9]/g, '');
+      if (!raw) {
+        resultEl.innerHTML = '<p class="error-msg">⚠️ Please enter your WhatsApp number</p>';
+        return;
+      }
+      if (raw.length < 10) {
+        resultEl.innerHTML = '<p class="error-msg">⚠️ Invalid number — include country code</p>';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerText = '...';
+      resultEl.innerHTML = '<p class="status-msg">⏳ Generating pairing code...</p>';
+
+      try {
+        const { data } = await axios(`/code?number=${raw}`);
+        const code = data.code || 'ERROR';
+
+        if (code === 'ERROR' || code === 'Service Unavailable') {
+          resultEl.innerHTML = '<p class="error-msg">❌ Failed to get pairing code. Try again.</p>';
+        } else {
+          resultEl.innerHTML = `
+            <div class="code-box">
+              <div class="code-label">Your Pairing Code</div>
+              <div class="code-value" id="codeVal" onclick="copyCode('${code}')">${code}</div>
+              <div class="copy-hint">tap to copy</div>
+            </div>
+          `;
+        }
+      } catch (err) {
+        resultEl.innerHTML = '<p class="error-msg">❌ Server error. Please try again later.</p>';
+      }
+
+      submitBtn.disabled = false;
+      submitBtn.innerText = 'PAIR';
+    });
+  </script>
+</body>
+</html>

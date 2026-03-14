@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: ak-x-md
+    env: node
+    region: singapore
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - key: MONGO_URI
+        sync: false
+      - key: OWNER_NUMBER
+        sync: false
+      - key: PREFIX
+        value: "."
+      - key: BOT_IMAGE
+        value: "https://files.catbox.moe/p2f8x0.jpg"
+      - key: NODE_ENV
+        value: production
