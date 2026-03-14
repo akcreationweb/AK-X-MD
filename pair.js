@@ -16,7 +16,7 @@ const {
   makeCacheableSignalKeyStore,
   jidNormalizedUser,
   DisconnectReason
-} = require('@whiskeysockets/baileys');
+} = require('dct-dula-baileys');
 
 // ───────────────────────────────────────────────
 //  CONFIG
