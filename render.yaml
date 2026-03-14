@@ -3,7 +3,7 @@ services:
     name: ak-x-md
     env: node
     region: singapore
-    buildCommand: npm install
+    buildCommand: npm install --legacy-peer-deps
     startCommand: node index.js
     envVars:
       - key: MONGO_URI
