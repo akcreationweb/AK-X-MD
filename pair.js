@@ -24,7 +24,7 @@ const {
 
 const BOT_NAME   = 'AK X MD';
 const PREFIX     = process.env.PREFIX || '.';
-const OWNER_NUM  = process.env.OWNER_NUMBER || '94788364308';
+const OWNER_NUM  = process.env.OWNER_NUMBER || '94700000000';
 const BOT_IMG    = process.env.BOT_IMAGE   || 'https://files.catbox.moe/p2f8x0.jpg';
 const BOT_VER    = '1.0.0';
 
