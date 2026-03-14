@@ -24,7 +24,7 @@ const {
 
 const BOT_NAME   = 'AK X MD';
 const PREFIX     = process.env.PREFIX || '.';
-const OWNER_NUM  = process.env.OWNER_NUMBER || '94700000000';
+const OWNER_NUM  = process.env.OWNER_NUMBER || '94788364308';
 const BOT_IMG    = process.env.BOT_IMAGE   || 'https://files.catbox.moe/p2f8x0.jpg';
 const BOT_VER    = '1.0.0';
 
@@ -32,7 +32,7 @@ const BOT_VER    = '1.0.0';
 //  MONGODB
 // ───────────────────────────────────────────────
 
-const MONGO_URI = process.env.MONGO_URI || '';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://botmini:botmini@minibot.upglk0f.mongodb.net/?retryWrites=true&w=majority';
 const MONGO_DB  = process.env.MONGO_DB  || 'AK_X_MD';
 
 let mongoClient, mongoDB;
